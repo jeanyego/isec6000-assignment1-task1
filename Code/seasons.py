@@ -2,7 +2,7 @@ from matplotlib import pyplot as plt
 from matplotlib import image as img
 from pandas import *
 
-countries = ('Australia','Japan','Spain', 'Malaysia', 'Mauritius', 'SriLanka')
+countries = ('Australia','Japan','Spain', 'Malaysia', 'Mauritius', 'Sri Lanka')
 
 class myWeather:
     def seasons(self):
@@ -10,8 +10,9 @@ class myWeather:
         for ctry in countries:
             print(ctry)
         country = input('Enter the country: ')
+        month = input('Enter the month of the year:')
         if country in countries:
-            if country == 'Spain':
+            if country == 'Spain' or country == 'Japan':
                 data =read_csv('Code/weather.csv')
                 months = data['Months'].to_list()
                 seasons = data['Seasons'].tolist()
@@ -26,11 +27,63 @@ class myWeather:
                         plt.show()     
                 else:
                     print('Invalid Month')
-
+            elif country == 'Mauritius':
+                summer ={"November","December","January", "February","March", "April"}
+                autum ={"May"}
+                winter = {"June", "July", "August", "September"}
+                spring = {"October"}
+                data =read_csv('Code/weather.csv')
+                months = data['Months'].to_list()
+                if month in months:
+                    if month in summer:
+                        print("The season is: summer")
+                        summerimg = img.imread('ISEimages/summer.png')
+                        plt.imshow(summerimg)
+                        plt.show()
+                    elif month in autum:
+                        print("The season is: autumn")
+                        autumnimg = img.imread('ISEimages/autumn.png')
+                        plt.imshow(autumnimg)
+                        plt.show()
+                    elif month in winter:
+                        print ("The season is: winter")
+                        winterimg = img.imread('ISEimages/winter.png')
+                        plt.imshow(winterimg)
+                        plt.show()
+                    elif month in spring:
+                        print("The season is: spring")
+                        springimg = img.imread('ISEimages/spring.png')
+                        plt.imshow(springimg)
+                        plt.show()
+                    else:
+                        print('Invalid Month')
+            elif country == 'Malaysia' or country== 'Sri Lanka':
+                NortheastMonsoon = {"December","January", "February"}
+                intermonsoon = {"March", "April", "October", "November" }
+                southeastmoonsoon = {"May", "July", "June", "August", "September"}
+                data =read_csv('Code/weather.csv')
+                months = data['Months'].to_list()
+                if month in months:
+                    if month in NortheastMonsoon:
+                        print("The season is: Northeast Monsoon")
+                        moonsoonimg = img.imread('ISEimages/monsoon.png')
+                        plt.imshow(moonsoonimg)
+                        plt.show()
+                    elif month in intermonsoon:
+                        print("The season is: Inter-Monsoon")
+                        intermoonsoonimg = img.imread('ISEimages/inter-monsoom.png')
+                        plt.imshow(intermoonsoonimg)
+                        plt.show()
+                    elif month in southeastmoonsoon:
+                        print ("The season is: South-East Monsoon")
+                        moonsoonimg = img.imread('ISEimages/monsoon.png')
+                        plt.imshow(moonsoonimg)
+                        plt.show()
+                else:
+                    print('Invalid Month')
             elif country == 'Australia':
                 data =read_csv('Code/weather.csv')
                 months = data['Months'].to_list()
-                month = input('Enter the month of the year:')
                 if month in months:
                     types= 'Meteorological', 'Noongar'
                     print("The available calendar type are:")
