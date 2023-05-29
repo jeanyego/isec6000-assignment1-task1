@@ -162,8 +162,56 @@ class myWeather:
         
         else:
             print('Enter a valid country')
-                
 
+    def temperature(self):
+
+        cities = {
+            'Perth': {'morning_temp': 18.2, 'afternoon_temp' :23.0 }, 
+            'Adelaide' : {'morning_temp': 16.5, 'afternoon_temp' :21.0 }, 
+            }
+        print("Available cities:")
+        for city in cities:
+            print(city)
+        # Prompt the user to enter a city
+        user_city = input("Enter the name of a city from the above options: ")
+        # Check if the entered city is valid
+        if user_city in cities:
+            print("Valid city entered:", user_city)
+            city_temp = cities [user_city]
+            morning = city_temp['morning_temp']
+            afternoon = city_temp['afternoon_temp']
+            #using 24hr clock
+            time =int(input("what time is it? "))
+            temp = round(float(input ("What is the temperature today? ")), 1)
+            print(temp)
+            if (time > 12):
+                if(temp > afternoon):
+                    print("The temperature is above average")
+                elif(temp < afternoon):
+                    print("The temperature is below average")
+                else:
+                    print("The temperature is the average temperature at this time of day")
+                temp_diff = temp - afternoon
+                if (temp_diff > 5):
+                    print("The temperature differs from the average temperature by 5 or more")  
+                    print("The average temperature at this time of day is:", afternoon)
+
+                else:
+                    print("The average temperature at this time of day is:", afternoon)
+            else:
+                if(temp > morning):
+                    print("The temperature is above average")
+                else:
+                    print("The temperature is below average")
+                temp_diff = temp - morning
+                if (temp_diff > 5):
+                    print("The temperature differs from the average temperature by 5 or more") 
+                    print("The average temperature at this time of day is:", morning) 
+                else:
+                    print("The average temperature at this time of day is:", morning)
+        else:
+            print("Invalid city entered.")
 
 weather = myWeather()
 weather.seasons()
+weather.temperature()
