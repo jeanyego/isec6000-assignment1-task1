@@ -5,34 +5,43 @@ from pandas import *
 countries = ('Australia','Japan','Spain', 'Malaysia', 'Mauritius', 'Sri Lanka')
 
 class myWeather:
-    def seasons(self):
-        print('Available Countries :')
-        for ctry in countries:
-            print(ctry)
-        country = input('Enter the country: ')
-        month = input('Enter the month of the year:')
+
+    def seasons(self, country, month):
         if country in countries:
             if country == 'Spain' or country == 'Japan':
-                data =read_csv('Code/weather.csv')
+                data =read_csv('weather.csv')
                 months = data['Months'].to_list()
                 seasons = data['Seasons'].tolist()
-                month = input('Enter the month of the year:')
+                # month = input('Enter the month of the year:')
                 if month in months:
                     index = months.index(month)
                     season = seasons[index]   
-                    print(f'The season is: {season}')
                     if season == 'Summer':
-                        summerimg = img.imread('ISEimages/summer.png')
+                        summerimg = img.imread('../ISEimages/summer.png')
                         plt.imshow(summerimg)
-                        plt.show()     
+                    elif season == 'Autumn':
+                        autumnimg = img.imread('../ISEimages/autumn.png')
+                        plt.imshow(autumnimg)
+
+                    elif season == 'Winter':
+                        winterimg = img.imread('../ISEimages/winter.png')
+                        plt.imshow(winterimg)
+
+                    elif season == 'Spring':
+                        springimg = img.imread('../ISEimages/spring.png')
+                        plt.imshow(springimg)
+                    # print( f'The season is: {season}')
+
+                    return f'The season is: {season}'
+
                 else:
-                    print('Invalid Month')
+                    return 'Invalid Month'
             elif country == 'Mauritius':
                 summer ={"November","December","January", "February","March", "April"}
                 autum ={"May"}
                 winter = {"June", "July", "August", "September"}
                 spring = {"October"}
-                data =read_csv('Code/weather.csv')
+                data =read_csv('weather.csv')
                 months = data['Months'].to_list()
                 if month in months:
                     if month in summer:
@@ -55,13 +64,13 @@ class myWeather:
                         springimg = img.imread('ISEimages/spring.png')
                         plt.imshow(springimg)
                         plt.show()
-                    else:
-                        print('Invalid Month')
+                else:
+                    print('Invalid Month')
             elif country == 'Malaysia' or country== 'Sri Lanka':
                 NortheastMonsoon = {"December","January", "February"}
                 intermonsoon = {"March", "April", "October", "November" }
                 southeastmoonsoon = {"May", "July", "June", "August", "September"}
-                data =read_csv('Code/weather.csv')
+                data =read_csv('weather.csv')
                 months = data['Months'].to_list()
                 if month in months:
                     if month in NortheastMonsoon:
@@ -82,7 +91,7 @@ class myWeather:
                 else:
                     print('Invalid Month')
             elif country == 'Australia':
-                data =read_csv('Code/weather.csv')
+                data =read_csv('weather.csv')
                 months = data['Months'].to_list()
                 if month in months:
                     types= 'Meteorological', 'Noongar'
@@ -99,7 +108,7 @@ class myWeather:
                             spring = {"September", "October", "November"}
                             if month in summer:
                                 print("The season is: summer")
-                                summerimg = img.imread('ISEimages/summer.png')
+                                summerimg = img.imread('../ISEimages/summer.png')
                                 plt.imshow(summerimg)
                                 plt.show()
                             elif month in autum:
@@ -158,13 +167,15 @@ class myWeather:
                     else:
                         print('Enter a valid season type')  
                 else:
-                    print('Enter a valid month')
+                    # print('Invalid month')
+                    return 'Invalid month'
+                # temp = self.temp
+                # weather.temperature()
         
         else:
-            print('Enter a valid country')
-
+            # print('Invalid country')
+            return 'Invalid country'
     def temperature(self):
-
         cities = {
             'Perth': {'morning_temp': 18.2, 'afternoon_temp' :23.0 }, 
             'Adelaide' : {'morning_temp': 16.5, 'afternoon_temp' :21.0 }, 
@@ -186,7 +197,7 @@ class myWeather:
             print(temp)
             if (time > 12):
                 if(temp > afternoon):
-                    print("The temperature is above average")
+                    return "The temperature is above average"
                 elif(temp < afternoon):
                     print("The temperature is below average")
                 else:
@@ -212,6 +223,13 @@ class myWeather:
         else:
             print("Invalid city entered.")
 
+print('Available Countries :')
+for ctry in countries:
+    print(ctry) 
+country = input('Enter the country: ')
+month = input('Enter the month of the year:')
 weather = myWeather()
-weather.seasons()
-weather.temperature()
+season = weather.seasons(country, month)
+
+plt.show()
+
